@@ -1,0 +1,18 @@
+.body {
+    background-color: rgb(148, 236, 233);
+}
+
+.post {
+    background-color: rgba(158, 158, 158, 0.897);
+    padding: 25px;
+    margin: 25px;
+    border-radius: 25px;
+}
+
+.comment {
+    background-color: rgb(83, 83, 83);
+    padding: 25px;
+    margin: 25px;
+    min-height: 100px;
+    border-radius: 25px;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'aisi.css' %}">
+    <script defer src="{% static 'posts.js' %}"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">AISI</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+    
+            </ul>
+            <span class="navbar-text">
+    
+                <p class="navbar-text mr-4">Hello {{request.session.user_name}}!</p>
+                <a href="/logout">Logout</a>
+            </span>
+    
+        </div>
+    </nav>
+
+
+    <div class="container p-4">
+        <div class="row">
+            <div class="col">
+                <form action="/create_post" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>All I'm saying is...</label>
+                        <input type="text" name="message" class="form-control">
+                    </div>
+                    <button class="btn btn-info">Post</button>
+                </form>
+
+                {% for post in aisi_posts reversed %}
+                    <div class="post">
+                        {{post.message}}
+                        <div class="comment">
+                            <form action="/add_comment/{{post.id}}" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>What are your thoughts?</label>
+                                    <input type="text" name="comment" class="form-control">
+                                </div>
+                                <button class="btn btn-info">Post</button>
+                            </form>
+
+                            {% for comment in post.post_comments.all %}
+                                <p>{{comment.comment}}</p>
+                            {% endfor %}
+                        </div>
+
+                        <a href="/like/{{post.id}}">Updoot</a>
+                        <p>Updoots {{post.likes.count}}</p>
+                    </div>
+                   
+                {% endfor %}
+
+                </div>
+              
+            
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

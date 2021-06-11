@@ -1,0 +1,31 @@
+<div class="post">
+    {{post.message}}
+    <div class="comment">
+
+        <input type='hidden' value="{{post.id}}" name='postid' id='postid'>
+
+        <form id="createComment" action="/add_comment/{{post.id}}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>What are your thoughts?</label>
+                <input type="text" name="comment" class="form-control">
+            </div>
+            <button class="btn btn-info">Post</button>
+        </form>
+
+        <div class="allComments">
+            {% for comment in post.post_comments.all %}
+            {% include "partial_comment.html" %}
+            {% endfor %}
+        </div>
+
+    </div>
+
+
+    <div id="like" style="color:rgb(4, 167, 167)">Updoot
+        <input type="hidden" value="{{post.id}}" id='hiddenvalue' class='hiddenvalue'>
+    </div>
+
+
+    <p id="likes{{post.id}}">Updoots:  {{ post.likes.count }}</p>
+</div>
