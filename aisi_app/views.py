@@ -99,12 +99,12 @@ def create_post(request):
 
     poster = User.objects.get(id=request.session["user_id"])
 
-    AISI_Post.objects.create(message=message,poster=poster)
+    #AISI_Post.objects.create(message=message,poster=poster)
 
-    #aisi_post = AISI_Post.objects.create(message=message,poster=poster)
+    aisi_post = AISI_Post.objects.create(message=message,poster=poster)
 
-    return redirect('/home')
-    #return redirect(f'/partial/{aisi_post.id}')
+    #return redirect('/home')
+    return redirect(f'/partial/{aisi_post.id}')
 
 
 def add_comment(request,id):
@@ -115,12 +115,12 @@ def add_comment(request,id):
 
     poster = User.objects.get(id=request.session["user_id"])
 
-    Comment.objects.create(comment=comment,poster=poster,aisi_post=aisi_post)
+    #Comment.objects.create(comment=comment,poster=poster,aisi_post=aisi_post)
 
-    #new_comment = Comment.objects.create(comment=comment,poster=poster,AISI_Post=AISI_Post)
+    new_comment = Comment.objects.create(comment=comment,poster=poster,aisi_post=aisi_post)
 
-    return redirect('/home')
-    #return redirect(f'/partial_comment/{new_comment.id}')
+    #return redirect('/home')
+    return redirect(f'/partial_comment/{new_comment.id}')
 
 def like(request,id):
 

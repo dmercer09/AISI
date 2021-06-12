@@ -36,7 +36,7 @@
     <div class="container p-4">
         <div class="row">
             <div class="col">
-                <form action="/create_post" method="post">
+                <form id="createPost" action="/create_post" method="post">
                     {% csrf_token %}
                     <div class="form-group">
                         <label>All I'm saying is...</label>
@@ -45,31 +45,14 @@
                     <button class="btn btn-info">Post</button>
                 </form>
 
+            <div class="allposts">
                 {% for post in aisi_posts reversed %}
-                    <div class="post">
-                        {{post.message}}
-                        <div class="comment">
-                            <form action="/add_comment/{{post.id}}" method="post">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label>What are your thoughts?</label>
-                                    <input type="text" name="comment" class="form-control">
-                                </div>
-                                <button class="btn btn-info">Post</button>
-                            </form>
-
-                            {% for comment in post.post_comments.all %}
-                                <p>{{comment.comment}}</p>
-                            {% endfor %}
-                        </div>
-
-                        <a href="/like/{{post.id}}">Updoot</a>
-                        <p>Updoots {{post.likes.count}}</p>
-                    </div>
-                   
+                    
+                   {% include "partial.html" %}
+                
                 {% endfor %}
 
-                </div>
+            
               
             
             </div>
