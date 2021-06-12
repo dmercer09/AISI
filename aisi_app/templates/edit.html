@@ -35,33 +35,20 @@
 
 
         <div class="container p-4">
+            <h2>Edit Post</h2>
             <div class="row">
                 <div class="col">
                     <div class="sample"></div>
-                    <form id="createPost" action="/create_post" method="post">
+                    <form id="editPost" action="/edit_post" method="post">
                         {% csrf_token %}
                         <div class="form-group">
                             <label>All I'm saying is...</label>
                             <input type="text" name="message" class="form-control">
                         </div>
-                        <button class="btn btn-info">Post</button>
+                        <button class="btn btn-info">Save</button>
                     </form>
-
-                    <div class="allposts">
-                    {% for post in aisi_posts reversed %}
-
-                        {% include "partial.html" %}
-
-                    {% endfor %}
-
-
-
-
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>
-
 </body>
-
-</html>

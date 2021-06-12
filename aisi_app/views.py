@@ -129,3 +129,36 @@ def like(request,id):
     aisi_post.likes.add(user)
 
     return redirect('/home')
+
+def delete_post(request,id):
+
+    aisi_post = AISI_Post.objects.get(id=id)
+    aisi_post.delete()
+
+    return redirect('/home')
+
+def delete_comment(request,id):
+
+    comment = Comment.objects.get(id=id)
+    comment.delete()
+    
+    return redirect('/home')
+
+def edit_post(request,id):
+
+    aisi_post = AISI_Post.objects.get(id=id)
+
+    if request.method == "GET":
+
+        context = {
+            "aisi_post": aisi_post
+        }
+
+        return render(request,"edit.html",context)
+    else:
+        return redirect('/home')
+
+
+#def edit_comment(request,id):
+
+    #return redirect('/home')

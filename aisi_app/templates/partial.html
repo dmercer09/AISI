@@ -1,6 +1,7 @@
 <div class="post">
     {{post.message}}
-    {{post.id}}
+    <a href="/delete/{{post.id}}">Delete</a>
+    <a href="/edit/{{post.id}}">Edit</a>
     <div class="comment">
         <input type='hidden' value="{{post.id}}" name='postid' id='postid'>
         <form id="createComment" action="/add_comment/{{post.id}}" method="post">
@@ -16,6 +17,10 @@
         {% for comment in post.post_comments.all %}
         {% include "partial_comment.html" %}
         {% endfor %}
+        <td>
+        <a href="/delete/{{comment.id}}">Delete</a>
+        <a href="/edit/{{comment.id">Edit</a>
+        </td>
         </div>
     </div>
 
